@@ -1,0 +1,23 @@
+<h1 class="mt-4 text-center">Welcome to Tweets Scrapper</h1>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3">
+                <i class="fab fa-twitter fa-2x"></i>
+            </h1>
+            <form action="/tweets" method="POST">
+                <div class="form-group">
+                    <label for="inputURL">Paste the URL</label>
+                    <input type="url" id="inputURL" name="inputURL" class="form-control"
+                        placeholder="Eg: https://twitter.com/showerfeelings"
+                        value="<%= typeof url != 'undefined' ? inputURL : '' %>" />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Fetch Tweets
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
