@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const {inputURL, tweetsScrapped} = require('./tweets');
-
-const $ = require("cheerio");
+ const $ = require("cheerio");
 const rp = require("request-promise");
  
 var inputURL, tweetsScrapped;
@@ -15,24 +13,17 @@ var inputURL, tweetsScrapped;
 
 
 // to render anything from the views folder
+ 
+router.get('/', (req, res) => res.render('welcome', {inputURL, tweetsScrapped }));
 
-console.log('inputURL is: ' + inputURL);
-
-router.get('/', (req, res) => res.render('welcome'));
-
-
-
-router.get('/tweets', (req, res) => res.render('tweets', {inputURL, tweetsScrapped }));
-
-
-
+ 
 // submit tweets button
-router.post("/tweets", (req, res) => {
+router.post("/", (req, res) => {
   var { inputURL } = req.body;
   console.log(inputURL);
 
   if (inputURL.includes("https://twitter.com/")) {
-  //  alert('...Tweets...loading... !!!');
+  
   console.log("inputURL is Valid: " + inputURL);
 
     rp(inputURL)
@@ -46,12 +37,22 @@ router.post("/tweets", (req, res) => {
 
         console.log("tweets scrapped... Succesfully!!");
 
-        res.render("tweets", { inputURL, tweetsScrapped });
+        if (tweetsScrapped == '') {
+
+          req.flash("error_msg", "Oops, looks like the account doesn't exist or it has no tweets, kindly check the twitter account");
+          res.redirect("/");          
+        } else {
+          res.render("welcome", { inputURL, tweetsScrapped });
+
+        }
+
       })
       .catch(err => {
-        console.log(err);
-
-        res.render("welcome", { inputURL, tweetsScrapped });
+        // console.log(err);
+        req.flash("error_msg", "Oops, looks like the account doesn't exist or it has no tweets, kindly check the twitter account");
+        res.status(301).redirect('/');
+        // res.redirect( inputURL , "/"); 
+        // res.render("welcome", { inputURL, tweetsScrapped });
       });
   } else {
     console.log("inputURL is not Valid: " + inputURL);
