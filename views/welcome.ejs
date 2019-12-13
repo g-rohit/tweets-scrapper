@@ -5,12 +5,13 @@
             <h1 class="text-center mb-3">
                 <i class="fab fa-twitter fa-2x"></i>
             </h1>
+            <%- include ('messages') %>
             <form action="/tweets" method="POST">
                 <div class="form-group">
-                    <label for="inputURL">Paste the URL</label>
+                    <label for="inputURL">Paste a valid twitter profile URL</label>
                     <input type="url" id="inputURL" name="inputURL" class="form-control"
                         placeholder="Eg: https://twitter.com/showerfeelings"
-                        value="<%= typeof url != 'undefined' ? inputURL : '' %>" />
+                        value="<%= typeof url != 'undefined' ? inputURL : '' %>" required/>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">
