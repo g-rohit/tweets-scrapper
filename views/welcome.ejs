@@ -8,10 +8,11 @@
             <%- include ('messages') %>
             <form action="/" method="POST">
                 <div class="form-group">
-                    <label for="inputURL">Paste a valid twitter profile URL</label>
-                    <input type="url" id="inputURL" name="inputURL" class="form-control"
-                        placeholder="Eg: https://twitter.com/showerfeelings"
-                        value="<%= inputURL %>" required />
+                    <!-- <label for="userinput" class="small">Paste a valid twitter profile URL or username</label> -->
+                    <input type="name" id="userinput" name="userinput" class="form-control"
+                        placeholder="Paste a valid twitter profile URL or username" value="" required />
+                    <span class="small text-secondary mt-3 ml-2 d-flex">Eg: https://twitter.com/showerfeelings or
+                        username: g_rohit19</span>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">
@@ -25,20 +26,38 @@
 
 <div class="row mt-5 mb-5">
     <div class="col-md-12 m-auto">
-        <% if(inputURL != undefined) {%>
+        <% if(userinput != undefined) {%>
+
         <div class="card card-body">
-             <p class="lead text-center text-secondary ml-4 mt-4 mb-0">Here are the latest tweets (Max: 20) in text format from: </p>
-            <a class=" text-center text-info ml-4 mb-0" href="<%= inputURL %>" target="_blank"> <%= inputURL %>
-            </a>
-            <div class="jumbotron jumbotron-fluid pt-0 mt-4 rounded-lg">
-                <div class="container p-4"  id="tweets__fetched">
-                    <%= tweetsScrapped %>
+            <!-- <p class="smallFont text-danger text-center">Please do not refresh the page unless you are done with copying
+                the text</p> -->
+
+            <p class="lead text-center text-secondary ml-4 mt-4 mb-0">Below are the recent tweet(s) (Max: 20) in text
+                format from: </p>
+            <a class=" text-center text-info ml-4 mb-0" href="<%= userinput %>" target="_blank"> <%= userinput %>
+
+                <a class=" text-center text-info ml-4 mb-0" href="" target="_blank">
+                </a>
+                <div class="jumbotron jumbotron-fluid pt-0 mt-4 rounded-lg">
+                    <div class="container p-4" id="tweets__fetched">
+                        <%= tweetsScrapped %>
+                    </div>
                 </div>
-            </div>
-            <p class="lead text-center">
-                    <a class="btn btn-primary btn-lg" href="#top" role="button">Go to top</a>
+                <p class="small text-center bg-secondary">Note: I am still working on formatting each tweet in a better
+                    way. Also, adding more features soon. </p>
+                <p class="lead text-center">
+
+                    <a class="btn btn-secondary" href="#top" role="button">Go to top</a>
                 </p>
         </div>
+        <div class="mt-5">
+            <p class="text-center">
+
+                <a class="btn btn-outline-secondary" href="https://twitter.com/g_rohit19" role="button"><i
+                        class="fab fa-twitter" aria-hidden="true"></i> Follow me on twitter</a>
+            </p>
+        </div>
         <% }%>
+
     </div>
 </div>

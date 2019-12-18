@@ -54,6 +54,7 @@ app.use("/", require("./routes/index"));
 //catch 404 error and forward to error handler
 app.use((req, res, next) => {
   // res.status(404).send("oops that doesnt exist");
+  //  console.log('res.status is: '  + res.status);
 
   res.status(404).render("404");
 });
